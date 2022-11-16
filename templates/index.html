@@ -50,14 +50,14 @@
     <div class="form-outline">
       <input type="text" name="experience" id="myInput" placeholder="Escribe una pregunta" required="required" />
     </div>
-    <button class="btn btn-success btn-block btn-large" onclick="request()">Enviar</button>
+    <button class="btn btn-success btn-block btn-large" onclick="setRequestToBot()">Enviar</button>
   
     </div>
   </div>
 
   <script>
 
-    function request() {
+    function setRequestToBot() {
       var name = document.getElementById("myInput").value;
       const dataString = {
         name: name,
