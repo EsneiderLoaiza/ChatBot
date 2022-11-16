@@ -3,12 +3,15 @@ import pickle
 
 
 app = Flask(__name__)
-model = pickle.load(open('nlp_model.pkl', 'rb'))
-vocabulary = pickle.load(open('knowledgebase_vocabulary.pkl', 'rb'))
-intent_names = pickle.load(open('intent_names.pkl', 'rb'))
+model = pickle.load(open('model_chatbot.pkl', 'rb'))
+vocabulary = pickle.load(open('chatbot_vocabulary.pkl', 'rb'))
+intent_names = pickle.load(open('response_chatbot.pkl', 'rb'))
 
 @app.route('/')
 def home():
+    print('****** model : ', model)
+    print('****** vocabulary : ', vocabulary)
+    print('****** intent_names : ', intent_names)
     return render_template('index.html')
 
 
@@ -19,6 +22,7 @@ def predict():
     '''
     user_utterance = [x for x in request.form.values()]
     utterance_vect = vocabulary.transform(user_utterance)
+    
     output = model.predict(utterance_vect)
     prediction = intent_names[output]
     return render_template('index.html', prediction_text=' Intent Recognized: {}'.format(prediction[0]))
