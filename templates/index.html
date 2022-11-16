@@ -1,33 +1,119 @@
 <!DOCTYPE html>
-<html >
+<html>
 <!--From https://codepen.io/frytyler/pen/EGdtg-->
+
 <head>
   <meta charset="UTF-8">
-  <title>ML API</title>
+  <title>Chatbot</title>
   <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css"
+  rel="stylesheet"
+/>
+
 </head>
 
 <body>
- <div class="login">
-	<h1>¿En que te puedo ayudar?</h1>
+    
+  <div class="menu">
+    <div class="back"><i class="fa fa-chevron-left"></i> <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+      alt="avatar 1" />
+    </div>
+    <div class="name">Bot asistente virtual</div>
+    <div class="last">08:17</div>
+  </div>
+  <ol class="chat">
+    <li class="other">
+      <div class="avatar"><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+        alt="avatar 1" style="width: 45px; height: 100%;"/></div>
+      <div class="msg">
+        <p>Hola!</p>
+        <p>Bienvenido al asistente virtual
+          <emoji class="pizza" />
+        </p>
+        <time>08:17</time>
+      </div>
+    </li>
 
-     <!-- Main Input For Receiving Query to our ML -->
+    <li class="self">
+      <div class="avatar"><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+        alt="avatar 1" style="width: 45px; height: 100%;"/></div>
+      <div class="msg">
+        <p>{{ prediction_text }}</p>
+      </div>
+    </li>
+
+    <li class="other">
+      <div class="avatar"><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+        alt="avatar 1" style="width: 45px; height: 100%;"/></div>
+      <div class="msg">
+        <p>{{ prediction_text }}
+          <emoji class="pizza" />
+        </p>
+      </div>
+    </li>
+
+    <ul id="myUL">
+    </ul>
+
+  </ol>
+
+  
+
+  <div class="form-outline">
     <form action="{{ url_for('predict')}}"method="post">
-    	<input type="text" name="experience" placeholder="Escribe una pregunta" required="required" />
-        <button type="submit" class="btn btn-primary btn-block btn-large">Enviar</button>
-    </form>
+      <input type="text" name="experience" id="myInput" placeholder="Escribe una pregunta" required="required" />
+  </div>
+  <button class="btn btn-success btn-block btn-large" onclick="getElementt">Enviar</button>
 
-   <br>
-   <br>
-   {{ prediction_text }}
+</div>
 
- </div>
-
+  <script>
+    
+    // Create a new list item when clicking on the "Add" button
+    var getElementt = getElement();
+    
+    function getElement() {
+      var li = document.createElement("p");
+      var lir = document.createElement("p");
+      var inputValue = document.getElementById("myInput").value;
+      li.innerHTML +='<li class="self">'+
+      '<div class="avatar"><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"'+
+        'alt="avatar 1" style="width: 45px; height: 100%;"/></div>'+
+      '<div class="msg">'+
+        '<p>'+inputValue+'</p>'+
+      '</div>'+
+      '</li>';
+      lir.innerHTML +=<div class="d-flex flex-row justify-content-start mb-4">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+          alt="avatar 1" style="width: 45px; height: 100%;"/>
+        <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">
+          <p class="small mb-0">Hello and thank you for visiting MDBootstrap. Please click the video
+            below.</p>
+        </div>
+      </div>;
+      if (inputValue !== '') {
+        console.log(" PASA 1")
+        alert("You must write something!");
+      } else {
+        console.log(" PASA 2")
+        document.getElementById("myUL").appendChild(li);
+        document.getElementById("myUL").appendChild(lir);
+      }
+      document.getElementById("myInput").value = "";
+    
+      for (i = 0; i < close.length; i++) {
+        close[i].onclick = function() {
+          var div = this.parentElement;
+          div.style.display = "none";
+        }
+      }
+    }
+  </script>
 
 </body>
 </html>

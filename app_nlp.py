@@ -25,7 +25,7 @@ def predict():
     
     output = model.predict(utterance_vect)
     prediction = intent_names[output]
-    return render_template('index.html', prediction_text=' Intent Recognized: {}'.format(prediction[0]))
+    return render_template('index.html', prediction_text=' {}'.format(prediction[0]))
 
 
 @app.route('/predict_api', methods=['POST'])
